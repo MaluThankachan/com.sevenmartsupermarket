@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ParallelRun" thread-count="5" parallel="tests">
+	<listeners>
+		<listener
+			class-name="com.sevenmartsupermarket.listeners.ExtentReporter">
+		</listener>
+	</listeners>
+	<test name="RegressionTest">
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.DashBoardTest">
+				<methods>
+					<include name="verifyAllCategory">
+					</include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="RegressionTest2">
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.AdminUsersTestCase">
+				<methods>
+					<include name="verifyClickAdminUserMoreInfo">
+					</include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="RegressionTest3">
+		<classes>
+			<class name="com.sevenmartsupermarket.tests.AdminUsersTestCase">
+				<methods>
+					<include name="verifySearchUser">
+					</include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
