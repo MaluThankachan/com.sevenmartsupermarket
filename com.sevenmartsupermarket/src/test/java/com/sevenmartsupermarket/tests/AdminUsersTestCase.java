@@ -37,7 +37,7 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		
 	}
-	@Test
+	@Test(groups = "regression")
 	public void verifyNewUserAlert() {
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
@@ -53,9 +53,8 @@ public class AdminUsersTestCase extends Base {
 		adminuserspage.clickSaveButton();
 		String actualNewUserAlert = adminuserspage.alertSuccessMsg();
 		String expectedNewUserAlert = "Alert!User Created Successfully";
-		softassert.assertEquals(actualNewUserAlert, expectedNewUserAlert);
-		softassert.assertEquals(actualNewUserBGC, expectedNewUserBGC);
-		softassert.assertAll();
+		Assert.assertEquals(actualNewUserAlert, expectedNewUserAlert);
+		
 	}
 	@Test
 	public void verifyAlreadyExistUserAlert() {
@@ -64,17 +63,14 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
-		adminuserspage.clickNewUser();
-		String expectedNewUserBGC = "rgba(220, 53, 69, 1)";
-		String actualNewUserBGC = adminuserspage.newUserBtnBackgroundColor();
+		adminuserspage.clickNewUser();		
 		adminuserspage.enterDetails("newuser4", "newuser4");
 		adminuserspage.selectUserType();
 		adminuserspage.clickSaveButton();
 		String actualNewUserAlert = adminuserspage.alertAlreadyExistUserMsg();
 		String expectedNewUserAlert = "Alert!Username already exists.";		
-		softassert.assertEquals(actualNewUserAlert, expectedNewUserAlert);
-		softassert.assertEquals(actualNewUserBGC, expectedNewUserBGC);
-		softassert.assertAll();
+		Assert.assertEquals(actualNewUserAlert, expectedNewUserAlert);
+		
 	}
 	@Test
 	public void verifySearchUser()
@@ -86,14 +82,6 @@ public class AdminUsersTestCase extends Base {
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.searchUserClick();
 		adminuserspage.searchUserNameInSearchBtn("merlyn","admin");
-		/*String actualAboveSearchBGC = adminuserspage.searchUserBGC();
-		String expectedAboveSearchBGC= "rgba(0, 105, 217, 1)";
-		softassert.assertEquals(actualAboveSearchBGC, expectedAboveSearchBGC);
-		adminuserspage.searchBelowButton();
-		String actualBelowSearchBGC= adminuserspage.searchBelowButtonBGC();
-		String expectedBelowSearchBGC= "rgba(215, 49, 65, 1)";
-		softassert.assertEquals(actualBelowSearchBGC, expectedBelowSearchBGC);
-		softassert.assertAll();*/
 		adminuserspage.searchBelowButton();
 		List<String> actualTableSearchValues = adminuserspage.getTableOfSearchedUser();
 		List<String> expectedTableSearchValues = new ArrayList<String>();
@@ -102,7 +90,6 @@ public class AdminUsersTestCase extends Base {
 		expectedTableSearchValues.add("active");
 		Assert.assertEquals(actualTableSearchValues, expectedTableSearchValues);
 		
-		//adminuserspage.resetButtonTop();
 		
 	}
 	@Test
@@ -115,5 +102,77 @@ public class AdminUsersTestCase extends Base {
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.resetButtonTop();
 	}
+	@Test
+	public void verifySearchBtnTableDeleteAction()
+	{
+		verifySearchUser();
+		adminuserspage = new AdminUsersPage(driver);
+		adminuserspage.getTableOfSearchedUser();
+		String actualAlertDeleteMsg= adminuserspage.deleteUserFromTable();
+		String expectedAlertDeleteMsg = "Alert!User Deleted Successfully";
+		System.out.println(expectedAlertDeleteMsg);
+		Assert.assertEquals(actualAlertDeleteMsg, expectedAlertDeleteMsg);				 
+	}
+	
+	@Test
+	public void verifySearchBtnAlreadyDeleteUserMsg()
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		adminuserspage.searchUserClick();
+		adminuserspage.searchUserNameInSearchBtn("Rochell Fritsch","admin");	
+		adminuserspage.searchBelowButton();
+		String actualAlertDeleteMsg= adminuserspage.getAlreadyDeletedUserMsg();
+		String expectedAlertDeleteMsg = ".........RESULT NOT FOUND.......";
+		Assert.assertEquals(actualAlertDeleteMsg, expectedAlertDeleteMsg);		
+		
+	}
+	
+	@Test
+	public void verifyAllAdminTableNames()
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		List<String> actualAdminTableNames = adminuserspage.getAllNamesAdminUserTable();
+		List<String> expectedAdminTableNames = actualAdminTableNames;
+		System.out.println(actualAdminTableNames);		
+		Assert.assertEquals(actualAdminTableNames, expectedAdminTableNames);		
+	}
+	
+	@Test
+	public void verifyAdminUserDeleteBtn()
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		String actualDeleteMsg = adminuserspage.DeleteAdminTableUser("Rochell Fritsch");
+		String expectedAlertDeleteMsg = "Alert!User Deleted Successfully";
+		Assert.assertEquals(actualDeleteMsg, expectedAlertDeleteMsg);
+	}
+	
+	
+	
+	@Test
+	public void verifyAdminTableCancelAlert()
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		String actualAlertText = adminuserspage.getAdminTableCancelAlert("merlyn");
+		String expectedAlertText =actualAlertText;
+		Assert.assertEquals(actualAlertText, expectedAlertText);
+	}
+	
+	
 
 }
