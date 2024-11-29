@@ -113,12 +113,9 @@ public class DashBoardPage {
 			for (WebElement element : clickDashboardComponents) {
 				String eachHref = element.getAttribute("href");
 				String[] parts = eachHref.split("/");
-				String lastSegment = parts[parts.length - 1];
-				System.out.println(lastSegment);
+				String lastSegment = parts[parts.length - 1];				
 				if (categoryName.equals(lastSegment)) {
-
 					try {
-						Thread.sleep(2000);
 						element.click();
 						getHeadingsTab();	
 						return ;									
@@ -137,15 +134,12 @@ public class DashBoardPage {
 		List<String> getEachCategory = generalutility.getTextOfElements(allCategory);
 		for (int i = 0; i < getEachCategory.size(); i++) {
 			for (WebElement element : alMoreInfoLink) {
-				String eachHref = element.getAttribute("href");
-				System.out.println("The HREF is " + eachHref);				
+				String eachHref = element.getAttribute("href");							
 				String[] parts = eachHref.split("/");
-				String lastSegment = parts[parts.length - 1];
-				Thread.sleep(2000);
-				System.out.println(lastSegment);				
+				String lastSegment = parts[parts.length - 1];										
 				if (categoryName.equals(lastSegment)) {
 					try {
-						Thread.sleep(2000);
+						
 						element.click();
 						getHeadingsTab();		
 						return;						

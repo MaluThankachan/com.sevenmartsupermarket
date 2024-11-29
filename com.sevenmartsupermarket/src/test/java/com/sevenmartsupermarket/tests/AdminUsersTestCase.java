@@ -45,13 +45,11 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.clickNewUser();		
-		String expectedNewUserBGC = "rgba(218, 51, 67, 1)";
-		String actualNewUserBGC = adminuserspage.newUserBtnBackgroundColor();
 		String nameOfUser = GeneralUtility.getRandomName();
 		adminuserspage.enterDetails(nameOfUser, "newuser10");
 		adminuserspage.selectUserType();
 		adminuserspage.clickSaveButton();
-		String actualNewUserAlert = adminuserspage.alertSuccessMsg();
+		String actualNewUserAlert = adminuserspage.alertSuccessMsg();		
 		String expectedNewUserAlert = "Alert!User Created Successfully";
 		Assert.assertEquals(actualNewUserAlert, expectedNewUserAlert);
 		
@@ -64,7 +62,7 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.clickNewUser();		
-		adminuserspage.enterDetails("newuser4", "newuser4");
+		adminuserspage.enterDetails("Hilton Nikolaus", "newuser10");
 		adminuserspage.selectUserType();
 		adminuserspage.clickSaveButton();
 		String actualNewUserAlert = adminuserspage.alertAlreadyExistUserMsg();
@@ -81,13 +79,16 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.searchUserClick();
-		adminuserspage.searchUserNameInSearchBtn("merlyn","admin");
+		adminuserspage.searchUserNameInSearchBtn("gsdb","admin");
 		adminuserspage.searchBelowButton();
 		List<String> actualTableSearchValues = adminuserspage.getTableOfSearchedUser();
 		List<String> expectedTableSearchValues = new ArrayList<String>();
-		expectedTableSearchValues.add("merlyn");
+		expectedTableSearchValues.add("gsdb");
 		expectedTableSearchValues.add("admin");
-		expectedTableSearchValues.add("active");
+		expectedTableSearchValues.add("Active");
+		expectedTableSearchValues.add("Details");
+		expectedTableSearchValues.add("");
+		expectedTableSearchValues.add("");
 		Assert.assertEquals(actualTableSearchValues, expectedTableSearchValues);
 		
 		
@@ -100,22 +101,51 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
+		adminuserspage.searchUserClick();
+		adminuserspage.searchUserNameInSearchBtn("gsdb","admin");
+		adminuserspage.searchBelowButton();
 		adminuserspage.resetButtonTop();
+		String expected = "Admin Users";
+		String actual = adminuserspage.getAdminUserHeading();
+		Assert.assertEquals(actual, expected);
 	}
 	@Test
-	public void verifySearchBtnTableDeleteAction()
+	public void verifySearchBtnTableDeleteAction() throws InterruptedException
 	{
-		verifySearchUser();
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
 		adminuserspage = new AdminUsersPage(driver);
-		adminuserspage.getTableOfSearchedUser();
-		String actualAlertDeleteMsg= adminuserspage.deleteUserFromTable();
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		adminuserspage.searchUserClick();
+		adminuserspage.searchUserNameInSearchBtn("keva","admin");
+		adminuserspage.searchBelowButton();		
+		String actualAlertDeleteMsg =adminuserspage.getNameOfSearchUserTable("keva");
 		String expectedAlertDeleteMsg = "Alert!User Deleted Successfully";
-		System.out.println(expectedAlertDeleteMsg);
-		Assert.assertEquals(actualAlertDeleteMsg, expectedAlertDeleteMsg);				 
+		Assert.assertEquals(actualAlertDeleteMsg, expectedAlertDeleteMsg);		
 	}
 	
 	@Test
-	public void verifySearchBtnAlreadyDeleteUserMsg()
+	public void verifyAdminSearchTableCancelAlert() throws InterruptedException
+	{loginpage = new LoginPage(driver);
+	loginpage.login("admin", "admin");
+	dashboardpage = new DashBoardPage(driver);
+	adminuserspage = new AdminUsersPage(driver);
+	dashboardpage.clickAdminMoreInfo();
+	adminuserspage = new AdminUsersPage(driver);
+	adminuserspage.searchUserClick();
+	adminuserspage.searchUserNameInSearchBtn("Antony","admin");
+	adminuserspage.searchBelowButton();		
+	adminuserspage.deleteUserCancel();
+	String expectedName = "Antony";
+	String actualName = adminuserspage.getNameFromTable();
+	Assert.assertEquals(actualName, expectedName);
+		
+	}
+	
+	@Test
+	public void verifySearchBtnResultNotFoundMsg() 
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
@@ -123,11 +153,12 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.searchUserClick();
-		adminuserspage.searchUserNameInSearchBtn("Rochell Fritsch","admin");	
-		adminuserspage.searchBelowButton();
+		adminuserspage.searchUserNameInSearchBtn("merlyn","admin");	
+		adminuserspage.searchBelowButton();		
 		String actualAlertDeleteMsg= adminuserspage.getAlreadyDeletedUserMsg();
 		String expectedAlertDeleteMsg = ".........RESULT NOT FOUND.......";
-		Assert.assertEquals(actualAlertDeleteMsg, expectedAlertDeleteMsg);		
+		Assert.assertEquals(actualAlertDeleteMsg, expectedAlertDeleteMsg);	
+		
 		
 	}
 	
@@ -139,12 +170,13 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
-		List<String> actualAdminTableNames = adminuserspage.getAllNamesAdminUserTable();
-		List<String> expectedAdminTableNames = actualAdminTableNames;
-		System.out.println(actualAdminTableNames);		
-		Assert.assertEquals(actualAdminTableNames, expectedAdminTableNames);		
+		adminuserspage.getAllNamesAdminUserTable();
+		String expected = "Admin Users";
+		String actual = adminuserspage.getAdminUserHeading();
+		Assert.assertEquals(actual, expected);		
 	}
 	
+
 	@Test
 	public void verifyAdminUserDeleteBtn()
 	{
@@ -153,22 +185,26 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
-		String actualDeleteMsg = adminuserspage.DeleteAdminTableUser("Rochell Fritsch");
+		String actualDeleteMsg = adminuserspage.DeleteAdminTableUser("admin756");
 		String expectedAlertDeleteMsg = "Alert!User Deleted Successfully";
-		Assert.assertEquals(actualDeleteMsg, expectedAlertDeleteMsg);
+		softassert.assertEquals(actualDeleteMsg, expectedAlertDeleteMsg);
+		String actualDeleteName = adminuserspage.checkDeleteAdminUserTable("admin756");
+		String expectedDelete = "Deleted";
+		softassert.assertEquals(actualDeleteName, expectedDelete);
 	}
 	
 	
 	
+	
 	@Test
-	public void verifyAdminTableCancelAlert()
+	public void verifyAdminTableCancelAlert() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
-		String actualAlertText = adminuserspage.getAdminTableCancelAlert("merlyn");
+		String actualAlertText = adminuserspage.getAdminTableCancelAlert("Antony");
 		String expectedAlertText =actualAlertText;
 		Assert.assertEquals(actualAlertText, expectedAlertText);
 	}

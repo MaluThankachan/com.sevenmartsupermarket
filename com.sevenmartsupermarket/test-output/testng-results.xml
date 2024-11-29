@@ -2,31 +2,31 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-11-27T17:06:03 GMT-08:00" name="Default suite" finished-at="2024-11-27T17:06:16 GMT-08:00" duration-ms="13856">
+  <suite started-at="2024-11-28T16:32:54 GMT-08:00" name="Default suite" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="15537">
     <groups>
     </groups>
-    <test started-at="2024-11-27T17:06:03 GMT-08:00" name="Default test" finished-at="2024-11-27T17:06:16 GMT-08:00" duration-ms="13856">
-      <class name="com.sevenmartsupermarket.tests.AdminUsersTest">
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.sevenmartsupermarket.tests.AdminUsersTest@29d80d2b]" started-at="2024-11-27T17:06:03 GMT-08:00" name="launchBrowser" finished-at="2024-11-27T17:06:09 GMT-08:00" duration-ms="6551" status="PASS">
+    <test started-at="2024-11-28T16:32:54 GMT-08:00" name="Default test" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="15537">
+      <class name="com.sevenmartsupermarket.tests.CategoriesTest">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8]" started-at="2024-11-28T16:32:54 GMT-08:00" name="launchBrowser" finished-at="2024-11-28T16:33:04 GMT-08:00" duration-ms="10096" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method signature="verifyAdminTableCancelAlert()[pri:0, instance:com.sevenmartsupermarket.tests.AdminUsersTest@29d80d2b]" started-at="2024-11-27T17:06:09 GMT-08:00" name="verifyAdminTableCancelAlert" finished-at="2024-11-27T17:06:16 GMT-08:00" duration-ms="7236" status="PASS">
+        <test-method signature="verifyDeleteCategoryFromTable()[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8]" started-at="2024-11-28T16:33:04 GMT-08:00" name="verifyDeleteCategoryFromTable" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="5294" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyAdminTableCancelAlert -->
-        <test-method is-config="true" signature="terminateSession(org.testng.ITestResult)[pri:0, instance:com.sevenmartsupermarket.tests.AdminUsersTest@29d80d2b]" started-at="2024-11-27T17:06:16 GMT-08:00" name="terminateSession" finished-at="2024-11-27T17:06:16 GMT-08:00" duration-ms="3" status="PASS">
+        </test-method> <!-- verifyDeleteCategoryFromTable -->
+        <test-method is-config="true" signature="terminateSession(org.testng.ITestResult)[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8]" started-at="2024-11-28T16:33:09 GMT-08:00" name="terminateSession" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="12" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyAdminTableCancelAlert status=SUCCESS method=AdminUsersTest.verifyAdminTableCancelAlert()[pri:0, instance:com.sevenmartsupermarket.tests.AdminUsersTest@29d80d2b] output={null}]]]>
+                <![CDATA[[TestResult name=verifyDeleteCategoryFromTable status=SUCCESS method=CategoriesTest.verifyDeleteCategoryFromTable()[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- terminateSession -->
-      </class> <!-- com.sevenmartsupermarket.tests.AdminUsersTest -->
+      </class> <!-- com.sevenmartsupermarket.tests.CategoriesTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

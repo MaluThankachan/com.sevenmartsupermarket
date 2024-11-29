@@ -28,7 +28,7 @@ public class WaitUtility {
 	public void waitElementForVisible(WebElement element, long time)
 	{
 		fluentwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(time))
-				.pollingEvery(Duration.ofSeconds(5))
+				.pollingEvery(Duration.ofSeconds(6))
 				.ignoring(ElementNotInteractableException.class);
 		
 		fluentwait.until(ExpectedConditions.visibilityOf(element));

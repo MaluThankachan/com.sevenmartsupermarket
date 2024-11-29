@@ -41,8 +41,10 @@ public class LoginPage {
 	}
 
 	public void enterUserName(String userName) {
+		waitutility.waitElementForVisible(userNameField, 20);
 		userNameField.sendKeys(userName);
 	}
+
 
 	public void enterPassword(String password) {
 		passwordField.sendKeys(password);

@@ -22,8 +22,8 @@ public class AdminUsersPage {
 	WebDriver driver;
 	PageUtility pageutility;
 	GeneralUtility generalutility;
-	
-	
+	WaitUtility waitutility;
+
 	@FindBy(xpath = "//a[@onclick='click_button(1)']")
 	WebElement newUser;
 	@FindBy(xpath = "//input[@id='username']")
@@ -54,34 +54,38 @@ public class AdminUsersPage {
 	List<WebElement> searchButtonBelowResultTable;
 	@FindBy(xpath = "//h1[contains(text(),'Admin Users')]")
 	WebElement adminUserHeading;
-	@FindBy(xpath = "//i[@class='fas fa-trash-alt']")
+	@FindBy(xpath = "//table//tbody//tr//td[5]//a[starts-with(@href, 'https://groceryapp.uniqassosiates.com/admin/user/delete?')]")
 	WebElement deleteUser;
 	@FindBy(xpath = "//table//tbody//tr//td//center")
 	WebElement alreadyDeleteUserMsg;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
 	List<WebElement> getAllNamesFromTable;
-	WaitUtility waitutility;
+	@FindBy(xpath = "//table//tbody//tr[1]//td[1]")
+	WebElement getSearchNameFromTable;
+	@FindBy(xpath = "//table//tbody//tr[1]//td[2]")
+	List<WebElement> getAlluserTypeTable;
+	@FindBy(xpath = "//table//tbody//tr")
+	List<WebElement> singleUserRow;
 
 	String deleteAlertMsg;
 	String alertText;
-	boolean status = true;
-	
+	String result ;
+
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		pageutility = new PageUtility(driver);
 		generalutility = new GeneralUtility();
 		waitutility = new WaitUtility(driver);
-		
+
 	}
-	
-	public String getAdminUserHeading()
-	{
+
+	public String getAdminUserHeading() {
 		return adminUserHeading.getText();
 	}
 
 	public void clickNewUser() {
-		
+
 		waitutility.waitElementForClickable(newUser, 20);
 		newUser.click();
 	}
@@ -97,7 +101,7 @@ public class AdminUsersPage {
 	}
 
 	public void enterDetails(String uname, String password) {
-		
+
 		enterNewUserName(uname);
 		enterNewPassword(password);
 	}
@@ -121,9 +125,10 @@ public class AdminUsersPage {
 
 	public String alertSuccessMsg() {
 		System.out.println(successAlertMessage.getText());
-		String alertMessage = successAlertMessage.getText().substring(2, 8);//!Alert
-		String message = successAlertMessage.getText().substring(9);//User Created Succesffully
-		String actualMsg = alertMessage + message;//!Alert User Created Succesffully
+		String alertMessage = successAlertMessage.getText().substring(2, 8);
+		String message = successAlertMessage.getText().substring(9);
+		String actualMsg = alertMessage + message;
+		System.out.println(actualMsg);
 		return actualMsg;
 	}
 
@@ -146,14 +151,15 @@ public class AdminUsersPage {
 	}
 
 	public String searchUserBGC() {
-		//explicitwait.until(ExpectedConditions.visibilityOf(searchButtonTop));
+
 		String actualSearchBGC = generalutility.getCssProperty(searchButtonTop, "background-color");
 		System.out.println("The backgroundcolor of search user is " + actualSearchBGC);
-		return actualSearchBGC;		
+		return actualSearchBGC;
 
 	}
 
 	public void searchUserNameInSearchBtn(String uname, String userType) {
+		waitutility.waitElementForVisible(searchUserNameField, 10);
 		searchUserNameField.sendKeys(uname);
 		pageutility.selectDropDownByValue(userTypeSelect, userType);
 
@@ -167,76 +173,112 @@ public class AdminUsersPage {
 		String actualSearchBelowBGC = generalutility.getCssProperty(searchButtonBelow, "background-color");
 		System.out.println("The background color of below search button is " + actualSearchBelowBGC);
 		return actualSearchBelowBGC;
-		
+
 	}
-	public void resetButtonTop()
-	{
+
+	public void resetButtonTop() {
 		resetBtnTop.click();
 		String resetBtnTopBGC = generalutility.getCssProperty(resetBtnTop, "background-color");
 		System.out.println("The reset top button background color " + resetBtnTopBGC);
-	
+
 	}
-	public List<String> getTableOfSearchedUser()
-	{
+
+	public List<String> getTableOfSearchedUser() {
 		List<String> tableRowValues = new ArrayList<String>();
 		tableRowValues = generalutility.getTextOfElements(searchButtonBelowResultTable);
 		System.out.println(tableRowValues);
 		return tableRowValues;
-		
+
 	}
-	
-	public String deleteUserFromTable()
-	{
-		deleteUser.click();
-		driver.switchTo().alert().accept();
-		return alertSuccessMsg();
+
+	public String getNameOfSearchUserTable(String name) throws InterruptedException {
+		String uname = getSearchNameFromTable.getText();
+		if (uname.equals(name)) {
+			deleteAlertMsg = deleteUserFromTable(uname);
+		}
+		return deleteAlertMsg;
 	}
-	public String deleteUserCancel()
-	{
-		deleteUser.click();
-		alertText  = driver.switchTo().alert().getText();
+
+	public String getNameFromTable() {
+		return getSearchNameFromTable.getText();
+	}
+
+	public String deleteUserFromTable(String uname) {
+
+		List<String> getAllNames = getAllNamesAdminUserTable();
+		for (String eachName : getAllNames) {
+			if (eachName.equals(uname)) {
+				pageutility.jsClick(deleteUser);
+				// deleteUser.click();
+				driver.switchTo().alert().accept();
+				result= alertSuccessMsg();
+				break;
+				
+			}
+		}
+		return result;
+	}
+
+	public String deleteUserCancel() throws InterruptedException {
+		Thread.sleep(2000);
+		pageutility.jsClick(deleteUser);
+		Thread.sleep(2000);
+		alertText = driver.switchTo().alert().getText();
 		driver.switchTo().alert().dismiss();
 		return alertText;
 	}
-	
-	public String getAlreadyDeletedUserMsg()
-	{
+
+	public String getAlreadyDeletedUserMsg() {
 		return alreadyDeleteUserMsg.getText();
 	}
-	
-	public List<String> getAllNamesAdminUserTable()
-	{
+
+	public List<String> getAllNamesAdminUserTable() {
 		List<String> allNames = generalutility.getTextOfElements(getAllNamesFromTable);
 		return allNames;
 	}
-	
-	public String DeleteAdminTableUser(String uname)
-	{
-		
+
+	String deleteName;
+
+	public String checkDeleteAdminUserTable(String uname) {
+		List<String> allNames = generalutility.getTextOfElements(getAllNamesFromTable);
+
+		for (String eachName : allNames) {
+			if (!eachName.equals(uname)) {
+				deleteName = "Deleted";
+			}
+		}
+		return deleteName;
+	}
+
+	public List<String> getAllUserTypeAdminUserTable() {
+		List<String> allUserType = generalutility.getTextOfElements(getAlluserTypeTable);
+		return allUserType;
+	}
+
+	public String DeleteAdminTableUser(String uname) {
+
 		List<String> getAllNames = getAllNamesAdminUserTable();
-		for(String eachName : getAllNames)
-		{
-			if(eachName.equals(uname))
-			{
-				 deleteAlertMsg = deleteUserFromTable();
+		for (String eachName : getAllNames) {
+			if (eachName.equals(uname)) {
+			
+				deleteAlertMsg = deleteUserFromTable(eachName);
+				System.out.println(eachName);
+				break;
 			}
 		}
 		return deleteAlertMsg;
-		
+
 	}
-	
-	public String getAdminTableCancelAlert(String uname)
-	{
+
+	public String getAdminTableCancelAlert(String uname) throws InterruptedException {
 		List<String> getAllNames = getAllNamesAdminUserTable();
-		for(String eachName : getAllNames)
-		{
-			if(eachName.equals(uname))
-			{
-				alertText = deleteUserCancel();				  
-				 
+		for (String eachName : getAllNames) {
+			if (eachName.equals(uname)) {
+				alertText = deleteUserCancel();
+
 			}
 		}
-		
+
 		return alertText;
 	}
 

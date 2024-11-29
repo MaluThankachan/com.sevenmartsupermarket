@@ -45,4 +45,9 @@ public class GeneralUtility {
 		return timeStamp;
 
 	}
+	
+	public void clickNewBtn(WebElement element)
+	{
+		element.click();
+	}
 }
