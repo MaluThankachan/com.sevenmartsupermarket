@@ -242,7 +242,7 @@ public class AdminUsersPage {
 		int index = 0;
 		for (index = 0; index < allTableNames.size(); index++) {
 			if (uname.equals(allTableNames.get(index))) {
-				System.out.println(allTableNames.get(index));
+				
 				index++;
 				break;
 			}
