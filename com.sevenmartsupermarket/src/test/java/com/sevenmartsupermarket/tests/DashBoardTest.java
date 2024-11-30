@@ -55,6 +55,17 @@ public class DashBoardTest extends Base {
 
 	}
 
+	@Test(dataProvider = "searchdashboarditems" ,dataProviderClass = Data_Providers.class)
+	public void verifyDashBoardMoreInfoFromDataproviders(String itemeach,String title) throws InterruptedException {
+		loginpage = new LoginPage(driver);
+		dashboardpage = new DashBoardPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage.clickEachCategory2(itemeach);
+		String actualTabHeadings = dashboardpage.getHeadingsTab();
+		String expectedTabHeadings = title;	
+		Assert.assertEquals(actualTabHeadings, expectedTabHeadings);
+
+	}
 	@Test
 	public void verifyDashboardList() throws InterruptedException {
 		loginpage = new LoginPage(driver);
@@ -104,6 +115,17 @@ public class DashBoardTest extends Base {
 		String actualTabHeadings = dashboardpage.getHeadingsTab();
 		String expectedTabHeadings = actualTabHeadings;
 		Assert.assertEquals(actualTabHeadings, expectedTabHeadings);
+	}
+	
+	@Test
+	public void verifyLogoutUser()
+	{
+		loginpage = new LoginPage(driver);
+		dashboardpage = new DashBoardPage(driver);
+		loginpage.login("admin", "admin");
+		String actual = dashboardpage.clickLogoutUser();
+		String expected ="7rmart supermarket";
+		Assert.assertEquals(actual, expected);
 	}
 
 

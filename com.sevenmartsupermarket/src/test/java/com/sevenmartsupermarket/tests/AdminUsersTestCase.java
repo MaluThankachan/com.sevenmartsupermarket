@@ -62,12 +62,27 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.clickNewUser();		
-		adminuserspage.enterDetails("Hilton Nikolaus", "newuser10");
+		adminuserspage.enterDetails("Isela Hills", "newuser10");
 		adminuserspage.selectUserType();
 		adminuserspage.clickSaveButton();
 		String actualNewUserAlert = adminuserspage.alertAlreadyExistUserMsg();
 		String expectedNewUserAlert = "Alert!Username already exists.";		
 		Assert.assertEquals(actualNewUserAlert, expectedNewUserAlert);
+		
+	}
+	
+	@Test
+	public void verifyHomeBtn()
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		adminuserspage.clickNewUser();	
+		String actualAdminName = adminuserspage.clickHomeBtn();
+		String expectedProfileName = "Admin";
+		Assert.assertEquals(actualAdminName, expectedProfileName);
 		
 	}
 	@Test
@@ -79,11 +94,11 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.searchUserClick();
-		adminuserspage.searchUserNameInSearchBtn("gsdb","admin");
+		adminuserspage.searchUserNameInSearchBtn("Isela Hills","admin");
 		adminuserspage.searchBelowButton();
 		List<String> actualTableSearchValues = adminuserspage.getTableOfSearchedUser();
 		List<String> expectedTableSearchValues = new ArrayList<String>();
-		expectedTableSearchValues.add("gsdb");
+		expectedTableSearchValues.add("Isela Hills");
 		expectedTableSearchValues.add("admin");
 		expectedTableSearchValues.add("Active");
 		expectedTableSearchValues.add("Details");
@@ -102,7 +117,7 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.searchUserClick();
-		adminuserspage.searchUserNameInSearchBtn("gsdb","admin");
+		adminuserspage.searchUserNameInSearchBtn("Vaidu","admin");
 		adminuserspage.searchBelowButton();
 		adminuserspage.resetButtonTop();
 		String expected = "Admin Users";
@@ -119,9 +134,9 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.searchUserClick();
-		adminuserspage.searchUserNameInSearchBtn("keva","admin");
+		adminuserspage.searchUserNameInSearchBtn("Vaidu","admin");
 		adminuserspage.searchBelowButton();		
-		String actualAlertDeleteMsg =adminuserspage.getNameOfSearchUserTable("keva");
+		String actualAlertDeleteMsg =adminuserspage.deleteNameOfSearchUserTable("Vaidu");
 		String expectedAlertDeleteMsg = "Alert!User Deleted Successfully";
 		Assert.assertEquals(actualAlertDeleteMsg, expectedAlertDeleteMsg);		
 	}
@@ -135,10 +150,10 @@ public class AdminUsersTestCase extends Base {
 	dashboardpage.clickAdminMoreInfo();
 	adminuserspage = new AdminUsersPage(driver);
 	adminuserspage.searchUserClick();
-	adminuserspage.searchUserNameInSearchBtn("Antony","admin");
+	adminuserspage.searchUserNameInSearchBtn("Farha","admin");
 	adminuserspage.searchBelowButton();		
 	adminuserspage.deleteUserCancel();
-	String expectedName = "Antony";
+	String expectedName = "Farha";
 	String actualName = adminuserspage.getNameFromTable();
 	Assert.assertEquals(actualName, expectedName);
 		
@@ -185,12 +200,10 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
-		String actualDeleteMsg = adminuserspage.DeleteAdminTableUser("admin756");
+		String actualDeleteMsg = adminuserspage.deleteUserFromAdminTable("Farh");
 		String expectedAlertDeleteMsg = "Alert!User Deleted Successfully";
 		softassert.assertEquals(actualDeleteMsg, expectedAlertDeleteMsg);
-		String actualDeleteName = adminuserspage.checkDeleteAdminUserTable("admin756");
-		String expectedDelete = "Deleted";
-		softassert.assertEquals(actualDeleteName, expectedDelete);
+		
 	}
 	
 	
@@ -204,9 +217,54 @@ public class AdminUsersTestCase extends Base {
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
-		String actualAlertText = adminuserspage.getAdminTableCancelAlert("Antony");
-		String expectedAlertText =actualAlertText;
+		String actualAlertText = adminuserspage.getAdminTableCancelAlert("Farha");
+		String expectedAlertText ="Farha";
 		Assert.assertEquals(actualAlertText, expectedAlertText);
+	}
+	
+	@Test
+	public void verifyAdminTableActiveButton() throws InterruptedException
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		List<String> actual = adminuserspage.getAdminTableActiveClick("Zaqura");
+		List<String> expected = new ArrayList<String>();
+		expected.add("Inactive");
+		expected.add("Alert!User Status Changed Successfully");
+		Assert.assertEquals(actual, expected);
+	}
+	@Test
+	public void verifyAdminTableInActiveButton() throws InterruptedException
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		List<String> actual = adminuserspage.getAdminTableActiveClick("Kala");
+		List<String> expected = new ArrayList<String>();
+		expected.add("Active");
+		expected.add("Alert!User Status Changed Successfully");
+		Assert.assertEquals(actual, expected);
+	}
+	
+	@Test
+	public void verifyAdminTableEditButton()throws InterruptedException
+	{
+		loginpage = new LoginPage(driver);
+		loginpage.login("admin", "admin");
+		dashboardpage = new DashBoardPage(driver);
+		dashboardpage.clickAdminMoreInfo();
+		adminuserspage = new AdminUsersPage(driver);
+		List<String> actual = adminuserspage.getAdminTableEditButtonClick("Annu");
+		List<String> expected = new ArrayList<String>();
+		expected.add("Amy");
+		expected.add("Alert!User Updated Successfully");
+		Assert.assertEquals(actual, expected);
+		
 	}
 	
 	

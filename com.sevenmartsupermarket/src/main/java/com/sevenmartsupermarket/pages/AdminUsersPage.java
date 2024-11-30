@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,10 @@ public class AdminUsersPage {
 	GeneralUtility generalutility;
 	WaitUtility waitutility;
 
+	@FindBy(xpath = "//a[text()='Home']")
+	WebElement homeBtn;
+	@FindBy(xpath = "//div[@class='info']//a")
+	WebElement dashboardProfileName;
 	@FindBy(xpath = "//a[@onclick='click_button(1)']")
 	WebElement newUser;
 	@FindBy(xpath = "//input[@id='username']")
@@ -66,10 +71,16 @@ public class AdminUsersPage {
 	List<WebElement> getAlluserTypeTable;
 	@FindBy(xpath = "//table//tbody//tr")
 	List<WebElement> singleUserRow;
+	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
+	WebElement deleteAlert;
+	@FindBy(xpath = "//table//tr//td[3]//a//span")
+	WebElement previousActiveStatus;
+	@FindBy(xpath = "//button[@name='Update']")
+	WebElement updateEditBtn;
 
 	String deleteAlertMsg;
 	String alertText;
-	String result ;
+	String result;
 
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
@@ -78,6 +89,12 @@ public class AdminUsersPage {
 		generalutility = new GeneralUtility();
 		waitutility = new WaitUtility(driver);
 
+	}
+	
+	public String clickHomeBtn()
+	{
+		pageutility.jsClick(homeBtn);
+		return dashboardProfileName.getText();
 	}
 
 	public String getAdminUserHeading() {
@@ -108,7 +125,7 @@ public class AdminUsersPage {
 
 	public AdminUsersPage selectUserType() {
 
-		pageutility.selectDropDownByIndex(userType, 3);
+		pageutility.selectDropDownByIndex(userType, 2);		
 		return this;
 	}
 
@@ -150,14 +167,6 @@ public class AdminUsersPage {
 		searchButtonTop.click();
 	}
 
-	public String searchUserBGC() {
-
-		String actualSearchBGC = generalutility.getCssProperty(searchButtonTop, "background-color");
-		System.out.println("The backgroundcolor of search user is " + actualSearchBGC);
-		return actualSearchBGC;
-
-	}
-
 	public void searchUserNameInSearchBtn(String uname, String userType) {
 		waitutility.waitElementForVisible(searchUserNameField, 10);
 		searchUserNameField.sendKeys(uname);
@@ -167,13 +176,6 @@ public class AdminUsersPage {
 
 	public void searchBelowButton() {
 		searchButtonBelow.click();
-	}
-
-	public String searchBelowButtonBGC() {
-		String actualSearchBelowBGC = generalutility.getCssProperty(searchButtonBelow, "background-color");
-		System.out.println("The background color of below search button is " + actualSearchBelowBGC);
-		return actualSearchBelowBGC;
-
 	}
 
 	public void resetButtonTop() {
@@ -191,7 +193,7 @@ public class AdminUsersPage {
 
 	}
 
-	public String getNameOfSearchUserTable(String name) throws InterruptedException {
+	public String deleteNameOfSearchUserTable(String name) throws InterruptedException {
 		String uname = getSearchNameFromTable.getText();
 		if (uname.equals(name)) {
 			deleteAlertMsg = deleteUserFromTable(uname);
@@ -209,11 +211,9 @@ public class AdminUsersPage {
 		for (String eachName : getAllNames) {
 			if (eachName.equals(uname)) {
 				pageutility.jsClick(deleteUser);
-				// deleteUser.click();
 				driver.switchTo().alert().accept();
-				result= alertSuccessMsg();
+				result = alertSuccessMsg();
 				break;
-				
 			}
 		}
 		return result;
@@ -237,49 +237,91 @@ public class AdminUsersPage {
 		return allNames;
 	}
 
-	String deleteName;
-
-	public String checkDeleteAdminUserTable(String uname) {
-		List<String> allNames = generalutility.getTextOfElements(getAllNamesFromTable);
-
-		for (String eachName : allNames) {
-			if (!eachName.equals(uname)) {
-				deleteName = "Deleted";
-			}
-		}
-		return deleteName;
-	}
-
-	public List<String> getAllUserTypeAdminUserTable() {
-		List<String> allUserType = generalutility.getTextOfElements(getAlluserTypeTable);
-		return allUserType;
-	}
-
-	public String DeleteAdminTableUser(String uname) {
-
-		List<String> getAllNames = getAllNamesAdminUserTable();
-		for (String eachName : getAllNames) {
-			if (eachName.equals(uname)) {
-			
-				deleteAlertMsg = deleteUserFromTable(eachName);
-				System.out.println(eachName);
+	public String deleteUserFromAdminTable(String uname) {
+		List<String> allTableNames = generalutility.getTextOfElements(getAllNamesFromTable);
+		int index = 0;
+		for (index = 0; index < allTableNames.size(); index++) {
+			if (uname.equals(allTableNames.get(index))) {
+				System.out.println(allTableNames.get(index));
+				index++;
 				break;
 			}
 		}
-		return deleteAlertMsg;
 
+		WebElement deleteActionTable = driver.findElement(By.xpath("//table//tbody//tr[" + index + "]//td[5]//a[3]"));
+		pageutility.jsClick(deleteActionTable);
+		driver.switchTo().alert().accept();
+		String actualDeleteMsg = getDeleteAlertMsg();
+		return actualDeleteMsg;
+	}
+
+	public String getDeleteAlertMsg() {
+		String alertMessage = deleteAlert.getText().substring(2, 8);
+		String message = deleteAlert.getText().substring(9);
+		String actualMsg = alertMessage + message;
+		System.out.println(actualMsg);
+		return actualMsg;
 	}
 
 	public String getAdminTableCancelAlert(String uname) throws InterruptedException {
-		List<String> getAllNames = getAllNamesAdminUserTable();
-		for (String eachName : getAllNames) {
-			if (eachName.equals(uname)) {
-				alertText = deleteUserCancel();
-
+		List<String> getAllNames = generalutility.getTextOfElements(getAllNamesFromTable);
+		int index;
+		for (index = 0; index < getAllNames.size(); index++) {
+			if (uname.equals(getAllNames.get(index))) {
+				System.out.println(getAllNames.get(index));
+				index++;
+				break;
 			}
 		}
-
-		return alertText;
+		WebElement deleteActionTable = driver.findElement(By.xpath("//table//tbody//tr[" + index + "]//td[5]//a[3]"));
+		pageutility.jsClick(deleteActionTable);
+		driver.switchTo().alert().dismiss();
+		return uname;
 	}
-
+	
+	public List<String> getAdminTableActiveClick(String uname) throws InterruptedException{
+		List<String> getAllNames = generalutility.getTextOfElements(getAllNamesFromTable);
+		int index;
+		for (index = 0; index < getAllNames.size(); index++) {
+			if (uname.equals(getAllNames.get(index))) {
+				System.out.println(getAllNames.get(index));
+				index++;
+				break;
+			}
+		}
+		WebElement activeActionTable = driver.findElement(By.xpath("//table//tbody//tr["+index+"]//td[5]//a[1]"));
+		String actualStatus = previousActiveStatus.getText();
+		pageutility.jsClick(activeActionTable);		
+		String alertMsg = alertSuccessMsg() ;
+		List<String> actualStatusAndAlert =  new ArrayList<String>();
+		actualStatusAndAlert.add(actualStatus);
+		actualStatusAndAlert.add(alertMsg);
+		System.out.println(actualStatusAndAlert);
+		return actualStatusAndAlert;
+	}
+	
+	public List<String> getAdminTableEditButtonClick(String uname) throws InterruptedException{
+		List<String> getAllNames = generalutility.getTextOfElements(getAllNamesFromTable);
+		int index;
+		for (index = 0; index < getAllNames.size(); index++) {
+			if (uname.equals(getAllNames.get(index))) {
+				System.out.println(getAllNames.get(index));
+				index++;
+				break;
+			}
+		}
+		WebElement editActionTable = driver.findElement(By.xpath("//table//tbody//tr["+index+"]//td[5]//a[2]"));
+		pageutility.jsClick(editActionTable);			
+		String actualUserName = newUserName.getText();		
+		newUserName.clear();
+		newUserName.sendKeys("Amy");
+		String changedUserName = generalutility.get_Attribute(newUserName, "value");
+		pageutility.jsClick(updateEditBtn);
+		String alertMsg = alertSuccessMsg() ;
+		List<String> actualUserNameAndAlert =  new ArrayList<String>();
+		actualUserNameAndAlert.add(changedUserName);
+		actualUserNameAndAlert.add(alertMsg);
+		System.out.println(actualUserNameAndAlert);
+		return actualUserNameAndAlert;
+	}
 }

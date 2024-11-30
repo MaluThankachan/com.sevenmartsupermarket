@@ -16,9 +16,9 @@ public class CategoriesTest extends Base {
 	@Test
 	public void verifyCreateCategory() throws InterruptedException {
 		loginpage = new LoginPage(driver);
-		dashboardpage = loginpage.login("admin", "admin");
-		dashboardpage.clickEachCategory2("list-category");
 		categoriespage = new CategoriesPage(driver);
+		dashboardpage = loginpage.login("admin", "admin");
+		dashboardpage.clickEachCategory2("list-category");		
 		categoriespage.clickNewCategory();
 		categoriespage.enterCategoryName("Sample4");
 		categoriespage.selectGroups();
@@ -86,6 +86,46 @@ public class CategoriesTest extends Base {
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");
 		categoriespage = new CategoriesPage(driver);	
-		categoriespage.getAllCategoryNamesTable("category1");
+		String actualDeleteMsg = categoriespage.deleteCategory("Small Leather Table");
+		String expectedDeleteMsg = "Alert!Category Deleted Successfully";
+		Assert.assertEquals(actualDeleteMsg, expectedDeleteMsg);
+	}
+	
+	@Test
+	public void verifyEditCategoryFromTable() throws InterruptedException
+	{
+		loginpage = new LoginPage(driver);
+		dashboardpage = loginpage.login("admin", "admin");
+		dashboardpage.clickEachCategory2("list-category");
+		categoriespage = new CategoriesPage(driver);	
+		String actualMsg = categoriespage.EditEnterCategory("Sample4", "EditValue1");
+		String expectedEditMsg = "EditValue1";
+		Assert.assertNotEquals(actualMsg,expectedEditMsg);
+		
+	}
+	
+	@Test
+	public void verifyEditSelectGroupCategory() throws InterruptedException
+	{
+		loginpage = new LoginPage(driver);
+		dashboardpage = loginpage.login("admin", "admin");
+		dashboardpage.clickEachCategory2("list-category");
+		categoriespage = new CategoriesPage(driver);	
+		String actualMsg = categoriespage.EditSelectGroupCategory("EditValue1");
+		String expectedEditMsg = " ";
+		Assert.assertNotEquals(actualMsg,expectedEditMsg);
+		
+	}
+	
+	@Test
+	public void verifyDeleteImageEdit() throws InterruptedException
+	{
+		loginpage = new LoginPage(driver);
+		dashboardpage = loginpage.login("admin", "admin");
+		dashboardpage.clickEachCategory2("list-category");
+		categoriespage = new CategoriesPage(driver);
+		String actualSRC = categoriespage.EditChangeImageCategory("Grocery");
+		String expectedSRC= "success.png";
+		Assert.assertNotEquals(actualSRC,expectedSRC);
 	}
 }

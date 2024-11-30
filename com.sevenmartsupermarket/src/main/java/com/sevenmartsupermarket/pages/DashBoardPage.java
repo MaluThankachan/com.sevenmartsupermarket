@@ -43,7 +43,14 @@ public class DashBoardPage {
 	WebElement dashboardCategory;
 	@FindBy(xpath = "//h1")
 	WebElement headingsofEachNewTab;
+	@FindBy(xpath = "//li[@class='nav-item dropdown']//a//i[@class='ace-icon fa fa-power-off']/..")
+	WebElement logout;
+	@FindBy(xpath = "//li[@class='nav-item dropdown']//a//i[@class='ace-icon fa fa-cog']/..")
+	WebElement settings;
+	@FindBy(xpath = "//b")
+	WebElement loginTitle;
 	String headings ;
+	
 
 	public DashBoardPage(WebDriver driver) {
 		this.driver = driver;
@@ -151,6 +158,13 @@ public class DashBoardPage {
 			}
 		}
 
+	}
+	
+	public String clickLogoutUser()
+	{
+		pageutility.jsClick(logout);
+		String actualLoginTitle = loginTitle.getText();
+		return actualLoginTitle;
 	}
 
 }

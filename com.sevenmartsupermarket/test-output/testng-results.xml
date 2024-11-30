@@ -2,31 +2,31 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-11-28T16:32:54 GMT-08:00" name="Default suite" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="15537">
+  <suite started-at="2024-11-29T12:19:56 GMT-08:00" name="Default suite" finished-at="2024-11-29T12:20:05 GMT-08:00" duration-ms="8145">
     <groups>
     </groups>
-    <test started-at="2024-11-28T16:32:54 GMT-08:00" name="Default test" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="15537">
-      <class name="com.sevenmartsupermarket.tests.CategoriesTest">
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8]" started-at="2024-11-28T16:32:54 GMT-08:00" name="launchBrowser" finished-at="2024-11-28T16:33:04 GMT-08:00" duration-ms="10096" status="PASS">
+    <test started-at="2024-11-29T12:19:56 GMT-08:00" name="Default test" finished-at="2024-11-29T12:20:05 GMT-08:00" duration-ms="8145">
+      <class name="com.sevenmartsupermarket.tests.DashBoardTest">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.sevenmartsupermarket.tests.DashBoardTest@f79e]" started-at="2024-11-29T12:19:57 GMT-08:00" name="launchBrowser" finished-at="2024-11-29T12:20:02 GMT-08:00" duration-ms="5513" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method signature="verifyDeleteCategoryFromTable()[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8]" started-at="2024-11-28T16:33:04 GMT-08:00" name="verifyDeleteCategoryFromTable" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="5294" status="PASS">
+        <test-method signature="verifyClickAllDashBoardComp()[pri:0, instance:com.sevenmartsupermarket.tests.DashBoardTest@f79e]" started-at="2024-11-29T12:20:02 GMT-08:00" name="verifyClickAllDashBoardComp" finished-at="2024-11-29T12:20:05 GMT-08:00" duration-ms="2573" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyDeleteCategoryFromTable -->
-        <test-method is-config="true" signature="terminateSession(org.testng.ITestResult)[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8]" started-at="2024-11-28T16:33:09 GMT-08:00" name="terminateSession" finished-at="2024-11-28T16:33:09 GMT-08:00" duration-ms="12" status="PASS">
+        </test-method> <!-- verifyClickAllDashBoardComp -->
+        <test-method is-config="true" signature="terminateSession(org.testng.ITestResult)[pri:0, instance:com.sevenmartsupermarket.tests.DashBoardTest@f79e]" started-at="2024-11-29T12:20:05 GMT-08:00" name="terminateSession" finished-at="2024-11-29T12:20:05 GMT-08:00" duration-ms="3" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyDeleteCategoryFromTable status=SUCCESS method=CategoriesTest.verifyDeleteCategoryFromTable()[pri:0, instance:com.sevenmartsupermarket.tests.CategoriesTest@4c39bec8] output={null}]]]>
+                <![CDATA[[TestResult name=verifyClickAllDashBoardComp status=SUCCESS method=DashBoardTest.verifyClickAllDashBoardComp()[pri:0, instance:com.sevenmartsupermarket.tests.DashBoardTest@f79e] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- terminateSession -->
-      </class> <!-- com.sevenmartsupermarket.tests.CategoriesTest -->
+      </class> <!-- com.sevenmartsupermarket.tests.DashBoardTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
