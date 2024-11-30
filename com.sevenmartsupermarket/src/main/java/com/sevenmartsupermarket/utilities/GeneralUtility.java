@@ -8,6 +8,7 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 import com.github.javafaker.Faker;
+import com.sevenmartsupermarket.constants.Constants;
 
 public class GeneralUtility {
 	public String get_Attribute(WebElement element, String attribute) {
@@ -49,5 +50,11 @@ public class GeneralUtility {
 	public void clickNewBtn(WebElement element)
 	{
 		element.click();
+	}
+	
+	public void uploadImage(WebElement element, String imageName)
+	{
+		String path = Constants.IMAGE_PATH + imageName + ".png";
+		element.sendKeys(path);
 	}
 }

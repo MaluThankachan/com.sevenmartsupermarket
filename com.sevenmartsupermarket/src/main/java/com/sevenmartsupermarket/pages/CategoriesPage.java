@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.sevenmartsupermarket.constants.Constants;
 import com.sevenmartsupermarket.utilities.GeneralUtility;
 import com.sevenmartsupermarket.utilities.PageUtility;
 import com.sevenmartsupermarket.utilities.WaitUtility;
@@ -100,7 +101,7 @@ public class CategoriesPage {
 	
 	public void chooseImageFile()
 	{
-		chooseFile.sendKeys(path);
+		generalutility.uploadImage(chooseFile, "success");
 	}
 	
 	public void clickShowTopMenuYes()

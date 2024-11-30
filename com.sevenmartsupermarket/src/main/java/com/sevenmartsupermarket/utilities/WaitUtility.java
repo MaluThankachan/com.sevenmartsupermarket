@@ -2,6 +2,7 @@ package com.sevenmartsupermarket.utilities;
 
 import java.time.Duration;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +33,14 @@ public class WaitUtility {
 				.ignoring(ElementNotInteractableException.class);
 		
 		fluentwait.until(ExpectedConditions.visibilityOf(element));
+	}
+	
+	public void waitElementForVisible2(By locator, long time)
+	{
+		fluentwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(time))
+				.pollingEvery(Duration.ofSeconds(6))
+				.ignoring(ElementNotInteractableException.class);					
+		fluentwait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 	
 

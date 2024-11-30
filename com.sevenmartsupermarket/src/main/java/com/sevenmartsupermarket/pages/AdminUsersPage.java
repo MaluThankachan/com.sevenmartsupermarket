@@ -25,6 +25,7 @@ public class AdminUsersPage {
 	GeneralUtility generalutility;
 	WaitUtility waitutility;
 
+	By user_Name = By.xpath("//input[@id='username']");
 	@FindBy(xpath = "//a[text()='Home']")
 	WebElement homeBtn;
 	@FindBy(xpath = "//div[@class='info']//a")
