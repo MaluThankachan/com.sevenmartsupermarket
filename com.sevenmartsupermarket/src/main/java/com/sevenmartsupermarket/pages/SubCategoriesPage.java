@@ -20,47 +20,47 @@ public class SubCategoriesPage {
 	GeneralUtility generalutility = new GeneralUtility();
 
 	@FindBy(xpath = "//h1[text()='List Categories']")
-	WebElement heading;
+	private WebElement heading;
 	@FindBy(xpath = "//a[@onclick='click_button(1)']")
-	WebElement newUserBtn;
+	private WebElement newUserBtn;
 	@FindBy(xpath = "//select[@id='cat_id']")
-	WebElement selectCategoryType;
+	private WebElement selectCategoryType;
 	@FindBy(xpath = "//input[@id='subcategory']")
-	WebElement enterSubCategory;
+	private WebElement enterSubCategory;
 	@FindBy(xpath = "//input[@id='main_img']")
-	WebElement chooseFile;
+	private WebElement chooseFile;
 	@FindBy(xpath = "//button[text()='Save']")
-	WebElement saveButton;
+	private WebElement saveButton;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement alertCreatedMsg;
+	private WebElement alertCreatedMsg;
 	@FindBy(xpath = "//a[text()='Cancel']")
-	WebElement cancelButton;
+	private WebElement cancelButton;
 	@FindBy(xpath = "//a[text()='Home']")
-	WebElement homeButton;
+	private WebElement homeButton;
 	@FindBy(xpath = "//div[@class='info']//a")
-	WebElement dashboardProfileName;
+	private WebElement dashboardProfileName;
 	@FindBy(xpath = "//a[@onclick='click_button(2)']")
-	WebElement searchButtonTop;
+	private WebElement searchButtonTop;
 	@FindBy(xpath = "//select")
-	WebElement searchSelectType;
+	private WebElement searchSelectType;
 	@FindBy(xpath = "//input[@placeholder='Sub Category']")
-	WebElement searchSubCtaegory;
+	private WebElement searchSubCtaegory;
 	@FindBy(xpath = "//button[@value='sr']")
-	WebElement searchButtonBelow;
+	private WebElement searchButtonBelow;
 	@FindBy(xpath = "//a[@class='btn btn-default btn-fix']")
-	WebElement resetSearch;
+	private WebElement resetSearch;
 	@FindBy(xpath = "//h4[text()='List Sub Categories']")
-	WebElement searchTableTitle;
+	private WebElement searchTableTitle;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
-	List<WebElement> categoryTableNames;
+	private List<WebElement> categoryTableNames;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement deleteAlertMsg;
+	private WebElement deleteAlertMsg;
 	@FindBy(xpath = "//h1[text()='Edit Category']")
-	WebElement editCategoryTitle;
+	private WebElement editCategoryTitle;
 	@FindBy(xpath = "//button[text()='Update']")
-	WebElement updateEditBtn;
+	private WebElement updateEditBtn;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement editAlertSuccess;
+	private WebElement editAlertSuccess;
 
 	String path = "C:\\Users\\MaluL\\OneDrive\\Desktop\\brocoli.png";
 
@@ -84,7 +84,7 @@ public class SubCategoriesPage {
 	}
 
 	public void selectCategory() {
-		pageutility.selectDropDownByIndex(selectCategoryType, 6);
+		pageutility.selectDropDownByIndex(selectCategoryType, 1);
 	}
 
 	public void enterSubCategoryName(String categoryName) {
@@ -92,7 +92,7 @@ public class SubCategoriesPage {
 	}
 
 	public void chooseImageFile() {
-		chooseFile.sendKeys(path);
+		generalutility.uploadImage(chooseFile,"brocoli");
 	}
 
 	public String saveCategory() {

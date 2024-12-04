@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.sevenmartsupermarket.tests.DashBoardTest">
+      <class name="com.sevenmartsupermarket.tests.SubCategoriesTest">
         <methods>
           <include name="launchBrowser"/>
           <include name="launchBrowser"/>
-          <include name="verifyDashBoardMoreInfoFromDataproviders" invocation-numbers="5"/>
+          <include name="verifyCreateSubCategoryButton"/>
           <include name="terminateSession"/>
         </methods>
-      </class> <!-- com.sevenmartsupermarket.tests.DashBoardTest -->
+      </class> <!-- com.sevenmartsupermarket.tests.SubCategoriesTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -14,14 +14,14 @@ public class SubCategoriesTest extends Base {
 	DashBoardPage dashboardpage;
 	SubCategoriesPage subcategoriespage;
 	@Test
-	public void verifyCreateCategory() throws InterruptedException {
+	public void verifyCreateSubCategoryButton() throws InterruptedException {
 		loginpage = new LoginPage(driver);		
 		dashboardpage = loginpage.login("admin", "admin");
 		subcategoriespage = new SubCategoriesPage(driver);
 		dashboardpage.clickEachCategory2("list-sub-category");	
 		subcategoriespage.clickNewSubCategory();
 		subcategoriespage.selectCategory();
-		subcategoriespage.enterSubCategoryName("Brocoli");
+		subcategoriespage.enterSubCategoryName("BrocoliVeg");
 		subcategoriespage.chooseImageFile();
 		String actualAlertMsg =subcategoriespage.saveCategory();	
 		String expectedAlertMsg = "Alert!Sub Category Created Successfully";

@@ -14,13 +14,13 @@ public class CategoriesTest extends Base {
 	CategoriesPage categoriespage;
 
 	@Test
-	public void verifyCreateCategory() throws InterruptedException {
+	public void verifyCreateCategoryButton() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		categoriespage = new CategoriesPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");		
 		categoriespage.clickNewCategory();
-		categoriespage.enterCategoryName("Sample4");
+		categoriespage.enterCategoryName("Vegetables");
 		categoriespage.selectGroups();
 		categoriespage.chooseImageFile();
 		categoriespage.clickShowTopMenuYes();
@@ -32,7 +32,7 @@ public class CategoriesTest extends Base {
 	}
 
 	@Test
-	public void verifyGoHome() throws InterruptedException {
+	public void verifyGoHomeButton() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");
@@ -124,8 +124,8 @@ public class CategoriesTest extends Base {
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");
 		categoriespage = new CategoriesPage(driver);
-		String actualSRC = categoriespage.EditChangeImageCategory("Grocery");
-		String expectedSRC= "success.png";
-		Assert.assertNotEquals(actualSRC,expectedSRC);
+		String actualSRC = categoriespage.EditChangeImageCategory("Vegetables");
+		String expectedSRC= "Alert!Category Updated Successfully";		
+		Assert.assertEquals(actualSRC,expectedSRC);
 	}
 }

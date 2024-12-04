@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import com.sevenmartsupermarket.base.Base;
 import com.sevenmartsupermarket.pages.AdminUsersPage;
 import com.sevenmartsupermarket.pages.DashBoardPage;
+import com.sevenmartsupermarket.pages.Data_Providers;
 import com.sevenmartsupermarket.pages.LoginPage;
 
 public class DashBoardTest extends Base {
@@ -17,7 +18,7 @@ public class DashBoardTest extends Base {
 	AdminUsersPage adminuserspage;
 
 	@Test(groups = "smoke")
-	public void verifyAllCategory() {
+	public void verifyAllItemsOfHomePage() {
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);
 		loginpage.login("admin", "admin");
@@ -40,7 +41,7 @@ public class DashBoardTest extends Base {
 	
 
 	@Test
-	public void verifyDashBoardMoreInfo() throws InterruptedException {
+	public void verifyDashBoardMoreInfoButtons() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);
 		loginpage.login("admin", "admin");
@@ -56,7 +57,7 @@ public class DashBoardTest extends Base {
 	}
 
 	@Test(dataProvider = "searchdashboarditems" ,dataProviderClass = Data_Providers.class)
-	public void verifyDashBoardMoreInfoFromDataproviders(String itemeach,String title) throws InterruptedException {
+	public void verifyDashBoardMoreInfoButtonUsingDataproviders(String itemeach,String title) throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);
 		loginpage.login("admin", "admin");
@@ -67,7 +68,7 @@ public class DashBoardTest extends Base {
 
 	}
 	@Test
-	public void verifyDashboardList() throws InterruptedException {
+	public void verifyDashboardDropDownListItems() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);
 		loginpage.login("admin", "admin");
@@ -118,7 +119,7 @@ public class DashBoardTest extends Base {
 	}
 	
 	@Test
-	public void verifyLogoutUser()
+	public void verifyLogoutUserButton()
 	{
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);

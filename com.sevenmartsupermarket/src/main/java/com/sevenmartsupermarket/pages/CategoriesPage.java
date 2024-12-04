@@ -19,61 +19,60 @@ public class CategoriesPage {
 	WaitUtility waitutility;
 	
 	@FindBy(xpath = "//h1[text()='List Categories']")
-	WebElement heading;
+	private WebElement heading;
 	@FindBy(xpath = "//a[@onclick='click_button(1)']")
-	WebElement newUserBtn;
+	private WebElement newUserBtn;
 	@FindBy(xpath = "//input[@id='category']")
-	WebElement enterCategoryField;
+	private WebElement enterCategoryField;
 	@FindBy(xpath = "//div[@class='ms-selectable']//li")
-	WebElement selectgroups;
+	private WebElement selectgroups;
 	@FindBy(xpath = "//input[@id='main_img']")
-	WebElement chooseFile;
+	private WebElement chooseFile;
 	@FindBy(xpath = "//input[@type='radio' and @name='top_menu' and @value='yes']")
-	WebElement showOnTopMenuYes;
+	private WebElement showOnTopMenuYes;
 	@FindBy(xpath = "//input[@type='radio' and @name='top_menu' and @value='no']")
-	WebElement showOnTopMenuNo;
+	private WebElement showOnTopMenuNo;
 	@FindBy(xpath = "//input[@type='radio' and @name='show_home' and @value='yes']")
-	WebElement showOnLeftMenuYes;
+	private WebElement showOnLeftMenuYes;
 	@FindBy(xpath = "//input[@type='radio' and @name='show_home' and @value='no']")
-	WebElement showOnLeftMenuNo;
+	private WebElement showOnLeftMenuNo;
 	@FindBy(xpath = "//button[text()='Save']")
-	WebElement saveButton;
+	private WebElement saveButton;
 	@FindBy(xpath = "//a[text()='Cancel']")
-	WebElement cancelButton;
+	private WebElement cancelButton;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement alertCreatedMsg;
+	private WebElement alertCreatedMsg;
 	@FindBy(xpath = "//a[@class='btn btn-rounded btn-warning' and contains(text(),'Reset')]")
-	WebElement resetBtnTop;
+	private WebElement resetBtnTop;
 	@FindBy(xpath = "//a[@onclick='click_button(2)']")
-	WebElement searchButtonTop;
+	private WebElement searchButtonTop;
 	@FindBy(xpath = "//input[@placeholder='Category']")
-	WebElement categorySearch;
+	private WebElement categorySearch;
 	@FindBy(xpath = "//button[@value='sr']")
-	WebElement searchButtonBelow;
+	private WebElement searchButtonBelow;
 	@FindBy(xpath = "//a[@class='btn btn-default btn-fix']")
-	WebElement resetSearch;
+	private WebElement resetSearch;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
-	WebElement searchUserTableName;
+	private WebElement searchUserTableName;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
-	List<WebElement> categoryTableNames;	
+	private List<WebElement> categoryTableNames;	
 	@FindBy(xpath = "//table//tbody//tr")
-	List<WebElement> alRowsFromTable;
+	private List<WebElement> alRowsFromTable;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement deleteAlertMsg;
+	private WebElement deleteAlertMsg;
 	@FindBy(xpath = "h1")
-	WebElement editCategoryTitle;
+	private WebElement editCategoryTitle;
 	@FindBy(xpath = "//span[@class='fas fa-trash-alt']/..")
-	WebElement deleteEditPage;
+	private WebElement deleteEditPage;
 	@FindBy(xpath = "//button[text()='Update']")
-	WebElement updateEditPage;
+	private WebElement updateEditPage;
 	@FindBy(xpath = "//div[@class='ms-selectable']//li")
-	WebElement selectEditgroups;
+	private WebElement selectEditgroups;
 	@FindBy(xpath = "//p//img")
-	WebElement prevImage;
+	private WebElement prevImage;	
+	private boolean status = false;
 	
-	boolean status = false;
-	
-	String path= "C:\\Users\\MaluL\\OneDrive\\Desktop\\success.png";
+	//String path= "C:\\Users\\MaluL\\OneDrive\\Desktop\\success.png";
 	GeneralUtility generalutility = new GeneralUtility();
 	PageUtility pageutility ;
 
@@ -101,7 +100,7 @@ public class CategoriesPage {
 	
 	public void chooseImageFile()
 	{
-		generalutility.uploadImage(chooseFile, "success");
+		generalutility.uploadImage(chooseFile, "brocoli");
 	}
 	
 	public void clickShowTopMenuYes()
@@ -287,10 +286,11 @@ public class CategoriesPage {
 		String[] parts = actualImage.split("/");
 		String lastValue = parts[parts.length - 1];
 		System.out.println(lastValue);
-		//waitutility.waitElementForVisible(chooseFile, 20);
 		chooseImageFile();
 		pageutility.jsClick(updateEditPage);
-		return lastValue;
+		String actual = getSuccessAlertMsg();
+		System.out.println(actual);
+		return actual;
 }	
 	
 

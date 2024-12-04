@@ -38,7 +38,7 @@ public class AdminUsersTestCase extends Base {
 		
 	}
 	@Test(groups = "regression")
-	public void verifyNewUserAlert() {
+	public void verifyNewUseButtonOfAdminUsers() {
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
 		dashboardpage = new DashBoardPage(driver);
@@ -120,8 +120,8 @@ public class AdminUsersTestCase extends Base {
 		adminuserspage.searchUserNameInSearchBtn("Vaidu","admin");
 		adminuserspage.searchBelowButton();
 		adminuserspage.resetButtonTop();
-		String expected = "Admin Users";
-		String actual = adminuserspage.getAdminUserHeading();
+		boolean expected = true;
+		boolean actual = adminuserspage.getSearchAdminTableHeading();
 		Assert.assertEquals(actual, expected);
 	}
 	@Test

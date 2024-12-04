@@ -17,15 +17,15 @@ public class ManageContactPage {
 	GeneralUtility generalutility = new GeneralUtility();
 	
 	@FindBy(xpath = "//h1[text()='Contact Us']")
-	WebElement manageContactTitle;
+	private WebElement manageContactTitle;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
-	List<WebElement> allTableContactNames;
+	private List<WebElement> allTableContactNames;
 	@FindBy(xpath = "//label//following-sibling::textarea[@placeholder='Enter the Address']")
-	WebElement editAddressField;
+	private WebElement editAddressField;
 	@FindBy(xpath = "//button[@name='Update']")
-	WebElement editUpdateBtn;
+	private WebElement editUpdateBtn;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement editAlertSuccess;
+	private WebElement editAlertSuccess;
 
 	
 	
@@ -63,4 +63,3 @@ public class ManageContactPage {
 		return actualMsg;
 	}
 }
-//table//tbody//tr["+index+"]//td[6]//a

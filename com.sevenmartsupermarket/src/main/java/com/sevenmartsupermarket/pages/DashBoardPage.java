@@ -21,35 +21,35 @@ public class DashBoardPage {
 	@FindBy(xpath = "//p[text()='Admin Users']/../../div/following-sibling::a")
 	private WebElement adminUserMoreInfo;
 	@FindBy(xpath = "//h3//following-sibling::p")
-	List<WebElement> allCategory;
+	private List<WebElement> allCategory;
 	@FindBy(xpath = "//li//a[contains(text(),'Home')]")
-	WebElement homeButton;
+	private WebElement homeButton;
 	@FindBy(xpath = "//div[@class='inner']//p[starts-with(text(),'Category')]/../../div//following-sibling::a")
-	WebElement categoryMoreInfoLink;
+	private WebElement categoryMoreInfoLink;
 	@FindBy(xpath = "//div[@class='inner']//following-sibling::a")
-	List<WebElement> alMoreInfoLink;
-	String lastWord;
+	private List<WebElement> alMoreInfoLink;
+	private String lastWord;
 	@FindBy(xpath = "//a[@class='nav-link']//i//following-sibling::p[contains(text(),'Dashboard')]//i")
-	WebElement dashboardList;
+	private WebElement dashboardList;
 	@FindBy(xpath = "//nav[@class='mt-2']//li[@class='nav-item has-treeview menu-open']//ul//a")
-	List<WebElement> dashboardListElements;
+	private List<WebElement> dashboardListElements;
 	@FindBy(xpath = "//p[contains(text(),'Manage product')]/../.")
-	WebElement manageProductClick;
+	private WebElement manageProductClick;
 	@FindBy(xpath = "//*[starts-with(@class,'nav-icon fas fa')]//following-sibling::p")
-	List<WebElement> dashboardAdminComponents;
+	private List<WebElement> dashboardAdminComponents;
 	@FindBy(xpath = "//*[starts-with(@class,'nav-icon fas fa')]//following-sibling::p/..")
-	List<WebElement> clickDashboardComponents;
+	private List<WebElement> clickDashboardComponents;
 	@FindBy(xpath = "//i[starts-with(@class,'nav-icon fas fa-f')]//preceding::a[@href='https://groceryapp.uniqassosiates.com/admin/list-category']")
-	WebElement dashboardCategory;
+	private WebElement dashboardCategory;
 	@FindBy(xpath = "//h1")
-	WebElement headingsofEachNewTab;
+	private WebElement headingsofEachNewTab;
 	@FindBy(xpath = "//li[@class='nav-item dropdown']//a//i[@class='ace-icon fa fa-power-off']/..")
-	WebElement logout;
+	private WebElement logout;
 	@FindBy(xpath = "//li[@class='nav-item dropdown']//a//i[@class='ace-icon fa fa-cog']/..")
-	WebElement settings;
+	private WebElement settings;
 	@FindBy(xpath = "//b")
-	WebElement loginTitle;
-	String headings ;
+	private WebElement loginTitle;
+	private String headings ;
 	
 
 	public DashBoardPage(WebDriver driver) {

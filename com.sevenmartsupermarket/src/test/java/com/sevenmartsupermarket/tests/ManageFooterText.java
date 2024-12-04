@@ -14,7 +14,7 @@ public class ManageFooterText extends Base {
 	ManageFooterTextPage managefooterpage;
 
 	@Test
-	public void verifyEditMangeContact() throws InterruptedException {
+	public void verifyEditMangeFooterText() throws InterruptedException {
 		loginpage = new LoginPage(driver);		
 		dashboardpage = loginpage.login("admin", "admin");
 		managefooterpage= new ManageFooterTextPage(driver);		

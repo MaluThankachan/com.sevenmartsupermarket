@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -16,12 +17,14 @@ public class LoginPage {
 	WaitUtility waitutility;
 	Properties properties = new Properties();
 	@FindBy(xpath = "//b")
-	WebElement loginHeadingWebElement;
+	private WebElement loginHeadingWebElement;
 	@FindBy(xpath = "//p[@class='login-box-msg']")
-	WebElement signInStartText;
+	private WebElement signInStartText;
 	@FindBy(xpath = "//input[@placeholder='Username']")
+	@CacheLookup
 	private WebElement userNameField;
 	@FindBy(xpath = "//input[@placeholder='Password']")
+	@CacheLookup
 	private WebElement passwordField;
 	@FindBy(xpath = "//button[contains(text(),'Sign')]")
 	private WebElement submitField;

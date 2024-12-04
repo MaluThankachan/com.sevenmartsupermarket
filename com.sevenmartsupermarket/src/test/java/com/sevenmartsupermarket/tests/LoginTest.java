@@ -16,7 +16,7 @@ public class LoginTest extends Base {
 	SoftAssert softassert = new SoftAssert();
 	
 	@Test(retryAnalyzer = com.sevenmartsupermarket.listeners.RetryAnalyzer.class)
-	public void verifyAdminUserLogin() {
+	public void verifyAdminUserLoginSuccess() {
 		loginpage = new LoginPage(driver);		
 		dashBoardPage = loginpage.login("admin", "admin");
 		System.out.println(GeneralUtility.getRandomName());
@@ -28,7 +28,7 @@ public class LoginTest extends Base {
 	}
 
 	@Test(groups = {"smoke","regression"})
-	public void verifyHeadings()
+	public void verifyTitleOfLoginPage()
 	{
 		loginpage = new LoginPage(driver);
 		String actualHeading = loginpage.loginHeading();

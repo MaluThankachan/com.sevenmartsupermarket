@@ -19,15 +19,15 @@ public class ManageFooterTextPage {
 	WaitUtility waitutility ;
 	
 	@FindBy(xpath = "//h1[text()='Footer Text']]")
-	WebElement manageFooterTitle;
+	private WebElement manageFooterTitle;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
-	List<WebElement> allTableContactNames;
+	private List<WebElement> allTableContactNames;
 	@FindBy(xpath = "//input[@name='phone']")
-	WebElement editphoneField;
+	private WebElement editphoneField;
 	@FindBy(xpath = "//button[@name='Update']")
-	WebElement editUpdateBtn;
+	private WebElement editUpdateBtn;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement editAlertSuccess;
+	private WebElement editAlertSuccess;
 	
 	public ManageFooterTextPage(WebDriver driver) {
 		this.driver = driver;

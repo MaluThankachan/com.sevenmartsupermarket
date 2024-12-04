@@ -27,61 +27,63 @@ public class AdminUsersPage {
 
 	By user_Name = By.xpath("//input[@id='username']");
 	@FindBy(xpath = "//a[text()='Home']")
-	WebElement homeBtn;
+	private WebElement homeBtn;
 	@FindBy(xpath = "//div[@class='info']//a")
-	WebElement dashboardProfileName;
+	private WebElement dashboardProfileName;
 	@FindBy(xpath = "//a[@onclick='click_button(1)']")
-	WebElement newUser;
+	private WebElement newUser;
 	@FindBy(xpath = "//input[@id='username']")
-	WebElement newUserName;
+	private WebElement newUserName;
 	@FindBy(xpath = "//input[@id='password']")
-	WebElement newUserPassword;
+	private WebElement newUserPassword;
 	@FindBy(xpath = "//select[@id='user_type']")
-	WebElement userType;
+	private WebElement userType;
 	@FindBy(xpath = "//button[@name='Create']")
-	WebElement saveButton;
+	private WebElement saveButton;
 	@FindBy(xpath = "//h5")
-	WebElement alertMessage;
+	private WebElement alertMessage;
 	@FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
-	WebElement alreadyExistAlertMessage;
+	private WebElement alreadyExistAlertMessage;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement successAlertMessage;
+	private WebElement successAlertMessage;
 	@FindBy(xpath = "//a[@onclick='click_button(2)']")
-	WebElement searchButtonTop;
+	private WebElement searchButtonTop;
 	@FindBy(xpath = "//input[@id='un']")
-	WebElement searchUserNameField;
+	private WebElement searchUserNameField;
 	@FindBy(xpath = "//select[@id='ut']")
-	WebElement userTypeSelect;
+	private WebElement userTypeSelect;
 	@FindBy(xpath = "//button[@value='sr']")
-	WebElement searchButtonBelow;
+	private WebElement searchButtonBelow;
 	@FindBy(xpath = "//a[@class='btn btn-rounded btn-warning' and contains(text(),'Reset')]")
-	WebElement resetBtnTop;
+	private WebElement resetBtnTop;
 	@FindBy(xpath = "//table//tbody//tr//td")
-	List<WebElement> searchButtonBelowResultTable;
+	private List<WebElement> searchButtonBelowResultTable;
 	@FindBy(xpath = "//h1[contains(text(),'Admin Users')]")
-	WebElement adminUserHeading;
+	private WebElement adminUserHeading;
 	@FindBy(xpath = "//table//tbody//tr//td[5]//a[starts-with(@href, 'https://groceryapp.uniqassosiates.com/admin/user/delete?')]")
-	WebElement deleteUser;
+	private WebElement deleteUser;
 	@FindBy(xpath = "//table//tbody//tr//td//center")
-	WebElement alreadyDeleteUserMsg;
+	private WebElement alreadyDeleteUserMsg;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
-	List<WebElement> getAllNamesFromTable;
+	private List<WebElement> getAllNamesFromTable;
 	@FindBy(xpath = "//table//tbody//tr[1]//td[1]")
-	WebElement getSearchNameFromTable;
+	private WebElement getSearchNameFromTable;
 	@FindBy(xpath = "//table//tbody//tr[1]//td[2]")
-	List<WebElement> getAlluserTypeTable;
+	private List<WebElement> getAlluserTypeTable;
 	@FindBy(xpath = "//table//tbody//tr")
-	List<WebElement> singleUserRow;
+	private List<WebElement> singleUserRow;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement deleteAlert;
+	private WebElement deleteAlert;
 	@FindBy(xpath = "//table//tr//td[3]//a//span")
-	WebElement previousActiveStatus;
+	private WebElement previousActiveStatus;
 	@FindBy(xpath = "//button[@name='Update']")
-	WebElement updateEditBtn;
+	private WebElement updateEditBtn;
+	@FindBy(xpath = "//div[@class='card-header']//h4[text()='Search Admin Users']")
+	private WebElement searchTableHeading;
 
-	String deleteAlertMsg;
-	String alertText;
-	String result;
+	private String deleteAlertMsg;
+	private String alertText;
+	private String result;
 
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
@@ -324,5 +326,20 @@ public class AdminUsersPage {
 		actualUserNameAndAlert.add(alertMsg);
 		System.out.println(actualUserNameAndAlert);
 		return actualUserNameAndAlert;
+	}
+	
+	public boolean getSearchAdminTableHeading()
+	{
+		String actual = searchTableHeading.getText();
+		boolean status = false;
+		String title = "Search Admin Users";
+		if(!actual.equals(title))
+		{
+			status = true;
+			
+		}
+			return status;
+		
+		
 	}
 }

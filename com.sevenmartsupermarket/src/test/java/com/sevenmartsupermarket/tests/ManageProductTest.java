@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.sevenmartsupermarket.base.Base;
 import com.sevenmartsupermarket.pages.DashBoardPage;
+import com.sevenmartsupermarket.pages.Data_Providers;
 import com.sevenmartsupermarket.pages.LoginPage;
 import com.sevenmartsupermarket.pages.ManageProductPage;
 import com.sevenmartsupermarket.pages.SubCategoriesPage;
