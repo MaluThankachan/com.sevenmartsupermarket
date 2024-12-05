@@ -12,6 +12,12 @@ public class Data_Providers {
 		excelreader.setExcelFile("DashBoardItems", "Items");
 		return excelreader.getMultidimentionalData(6, 2);
 	}
+	
+	@DataProvider(name = "editmanagecontact") // this should be given in our test case
+	public Object[][] manageContactEdit() {
+		excelreader.setExcelFile("DataProviderForManageContact", "Sheet1");
+		return excelreader.getMultidimentionalData(1, 5);
+	}
 
 	@DataProvider(name = "addmanageproduct")
 	public Object[][] enterproducts() {

@@ -20,8 +20,16 @@ public class ManageContactPage {
 	private WebElement manageContactTitle;
 	@FindBy(xpath = "//table//tbody//tr//td[1]")
 	private List<WebElement> allTableContactNames;
+	@FindBy(xpath = "//input[@name='phone']")
+	private WebElement editPhoneField;
+	@FindBy(xpath = "//input[@name='email']")
+	private WebElement gmailField;
 	@FindBy(xpath = "//label//following-sibling::textarea[@placeholder='Enter the Address']")
 	private WebElement editAddressField;
+	@FindBy(xpath = "//textarea[@name='del_time']")
+	private WebElement timeField;
+	@FindBy(xpath = "//input[@name='del_limit']")
+	private WebElement limitField;
 	@FindBy(xpath = "//button[@name='Update']")
 	private WebElement editUpdateBtn;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
@@ -50,6 +58,26 @@ public class ManageContactPage {
 		pageutility.jsClick(editAction);
 		editAddressField.clear();
 		editAddressField.sendKeys("InfoPark,Cochin");
+		pageutility.scrollAndClick(editUpdateBtn);
+		return getEditAlertMsg();
+		
+		
+	}
+	
+	public String EditContactUsingDataProvider(String phnum, String gmail ,String address,String time,
+			String limit) {
+		WebElement editAction = driver.findElement(By.xpath("//table//tbody//tr[\"+index+\"]//td[6]//a"));
+		pageutility.jsClick(editAction);
+		editPhoneField.clear();
+		editPhoneField.sendKeys(phnum);
+		gmailField.clear();
+		gmailField.sendKeys(gmail);		
+		editAddressField.clear();
+		editAddressField.sendKeys(address);
+		timeField.clear();
+		timeField.sendKeys(time);
+		limitField.clear();
+		limitField.sendKeys(limit);		
 		pageutility.scrollAndClick(editUpdateBtn);
 		return getEditAlertMsg();
 		
