@@ -38,7 +38,7 @@ public class AdminUsersTestCase extends Base {
 		
 	}
 	@Test(groups = "regression")
-	public void verifyNewUseButtonOfAdminUsers() {
+	public void verifyIsClickableOfNewAdminUsersUserButton() {
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
 		dashboardpage = new DashBoardPage(driver);
@@ -55,7 +55,7 @@ public class AdminUsersTestCase extends Base {
 		
 	}
 	@Test
-	public void verifyAlreadyExistUserAlert() {
+	public void verifyAlreadyExistUserAlertMessage() {
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
 		dashboardpage = new DashBoardPage(driver);
@@ -72,7 +72,7 @@ public class AdminUsersTestCase extends Base {
 	}
 	
 	@Test
-	public void verifyHomeBtn()
+	public void verifyIsHomeButtonClickable()
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
@@ -86,7 +86,7 @@ public class AdminUsersTestCase extends Base {
 		
 	}
 	@Test
-	public void verifySearchUser()
+	public void verifySearchUserButtonIsClickable()
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
@@ -109,7 +109,7 @@ public class AdminUsersTestCase extends Base {
 		
 	}
 	@Test
-	public void verifyResetButton()
+	public void verifyResetButtonIsClickable()
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
@@ -125,7 +125,7 @@ public class AdminUsersTestCase extends Base {
 		Assert.assertEquals(actual, expected);
 	}
 	@Test
-	public void verifySearchBtnTableDeleteAction() throws InterruptedException
+	public void verifyDeleteEntriesFromSearchBtnTable() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
@@ -142,7 +142,7 @@ public class AdminUsersTestCase extends Base {
 	}
 	
 	@Test
-	public void verifyAdminSearchTableCancelAlert() throws InterruptedException
+	public void verifyCancelAlertMessageOfSearchTable() throws InterruptedException
 	{loginpage = new LoginPage(driver);
 	loginpage.login("admin", "admin");
 	dashboardpage = new DashBoardPage(driver);
@@ -178,7 +178,7 @@ public class AdminUsersTestCase extends Base {
 	}
 	
 	@Test
-	public void verifyAllAdminTableNames()
+	public void verifyAdminusersTitle()
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
@@ -193,14 +193,14 @@ public class AdminUsersTestCase extends Base {
 	
 
 	@Test
-	public void verifyAdminUserDeleteBtn()
+	public void verifyDeleteEntriesFromTable()
 	{
 		loginpage = new LoginPage(driver);
 		loginpage.login("admin", "admin");
 		dashboardpage = new DashBoardPage(driver);
 		dashboardpage.clickAdminMoreInfo();
 		adminuserspage = new AdminUsersPage(driver);
-		String actualDeleteMsg = adminuserspage.deleteUserFromAdminTable("Farh");
+		String actualDeleteMsg = adminuserspage.deleteUserFromAdminTable("Colene Harber");
 		String expectedAlertDeleteMsg = "Alert!User Deleted Successfully";
 		softassert.assertEquals(actualDeleteMsg, expectedAlertDeleteMsg);
 		

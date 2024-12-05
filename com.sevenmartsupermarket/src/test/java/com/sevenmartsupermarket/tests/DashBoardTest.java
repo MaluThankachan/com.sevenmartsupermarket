@@ -18,7 +18,7 @@ public class DashBoardTest extends Base {
 	AdminUsersPage adminuserspage;
 
 	@Test(groups = "smoke")
-	public void verifyAllItemsOfHomePage() {
+	public void verifyAllCardItemNamesOfHomePage() {
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);
 		loginpage.login("admin", "admin");
@@ -41,7 +41,7 @@ public class DashBoardTest extends Base {
 	
 
 	@Test
-	public void verifyDashBoardMoreInfoButtons() throws InterruptedException {
+	public void verifyDashBoardMoreInfoButtonIsClickable() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);
 		loginpage.login("admin", "admin");
@@ -68,7 +68,7 @@ public class DashBoardTest extends Base {
 
 	}
 	@Test
-	public void verifyDashboardDropDownListItems() throws InterruptedException {
+	public void verifyDashboardDropDownListItemsClickable() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = new DashBoardPage(driver);
 		loginpage.login("admin", "admin");

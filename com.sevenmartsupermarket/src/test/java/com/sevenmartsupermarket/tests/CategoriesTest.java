@@ -14,13 +14,13 @@ public class CategoriesTest extends Base {
 	CategoriesPage categoriespage;
 
 	@Test
-	public void verifyCreateCategoryButton() throws InterruptedException {
+	public void verifyNewCreateCategoryButton() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		categoriespage = new CategoriesPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");		
 		categoriespage.clickNewCategory();
-		categoriespage.enterCategoryName("Vegetables");
+		categoriespage.enterCategoryName("Accessories");
 		categoriespage.selectGroups();
 		categoriespage.chooseImageFile();
 		categoriespage.clickShowTopMenuYes();
@@ -32,7 +32,7 @@ public class CategoriesTest extends Base {
 	}
 
 	@Test
-	public void verifyGoHomeButton() throws InterruptedException {
+	public void verifyGoHomeButtonClick() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");
@@ -46,7 +46,7 @@ public class CategoriesTest extends Base {
 	}
 
 	@Test
-	public void verifyResetButton() throws InterruptedException {
+	public void verifyIfResetButtonIsClickable() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");
@@ -57,7 +57,7 @@ public class CategoriesTest extends Base {
 	}
 
 	@Test
-	public void verifySearchCategory() throws InterruptedException {
+	public void verifySearchCategoryButton() throws InterruptedException {
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");
@@ -80,7 +80,7 @@ public class CategoriesTest extends Base {
 	}
 	
 	@Test
-	public void verifyDeleteCategoryFromTable() throws InterruptedException
+	public void verifyDeleteEntriesFromTable() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
@@ -92,7 +92,7 @@ public class CategoriesTest extends Base {
 	}
 	
 	@Test
-	public void verifyEditCategoryFromTable() throws InterruptedException
+	public void verifyEditEntriesFromTable() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
@@ -105,7 +105,7 @@ public class CategoriesTest extends Base {
 	}
 	
 	@Test
-	public void verifyEditSelectGroupCategory() throws InterruptedException
+	public void verifyEditTableEntriesUsingSearchButton() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
@@ -118,13 +118,13 @@ public class CategoriesTest extends Base {
 	}
 	
 	@Test
-	public void verifyDeleteImageEdit() throws InterruptedException
+	public void verifyImageIsEditableFromTable() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-category");
 		categoriespage = new CategoriesPage(driver);
-		String actualSRC = categoriespage.EditChangeImageCategory("Vegetables");
+		String actualSRC = categoriespage.EditChangeImageCategory("veggies");
 		String expectedSRC= "Alert!Category Updated Successfully";		
 		Assert.assertEquals(actualSRC,expectedSRC);
 	}

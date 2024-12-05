@@ -40,7 +40,7 @@ public class LoginTest extends Base {
 	}
 	
 	@Test
-	public void verifyInvalidUserName()
+	public void verifyInvalidUserNameMessage()
 	{
 		dashBoardPage = new DashBoardPage(driver);
 		loginpage = new LoginPage(driver);
@@ -51,7 +51,7 @@ public class LoginTest extends Base {
 	
 	
 	@Test
-	public void verifyInvalidPassword()
+	public void verifyInvalidPasswordMessage()
 	{
 		dashBoardPage = new DashBoardPage(driver);
 		loginpage = new LoginPage(driver);
@@ -61,7 +61,7 @@ public class LoginTest extends Base {
 	}
 	
 	@Test
-	public void verifyInvalidUsernameAndPassword()
+	public void verifyInvalidUsernameAndPasswordMessage()
 	{
 		dashBoardPage = new DashBoardPage(driver);
 		loginpage = new LoginPage(driver);

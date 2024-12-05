@@ -16,7 +16,7 @@ public class ManageContactTest extends Base {
 	ManageContactPage managecontactpage;
 	
 	@Test
-	public void verifyEditMangeContact() throws InterruptedException {
+	public void verifyEditEntriesFromManageContact() throws InterruptedException {
 		loginpage = new LoginPage(driver);		
 		dashboardpage = loginpage.login("admin", "admin");
 		managecontactpage = new ManageContactPage(driver);		

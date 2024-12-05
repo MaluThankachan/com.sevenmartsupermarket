@@ -133,7 +133,7 @@ public class SubCategoriesPage {
 
 	public String searchResetCategoryClick(String subCategoryName) {
 		searchClick();
-		pageutility.selectDropDownByIndex(searchSelectType, 6);
+		pageutility.selectDropDownByIndex(searchSelectType, 1);
 		searchSubCtaegory.sendKeys(subCategoryName);
 		resetSearch.click();
 		String actualTitle = getTitleSearchTable();

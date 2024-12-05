@@ -14,7 +14,7 @@ public class SubCategoriesTest extends Base {
 	DashBoardPage dashboardpage;
 	SubCategoriesPage subcategoriespage;
 	@Test
-	public void verifyCreateSubCategoryButton() throws InterruptedException {
+	public void verifyCreateSubCategoryButtonIsClickable() throws InterruptedException {
 		loginpage = new LoginPage(driver);		
 		dashboardpage = loginpage.login("admin", "admin");
 		subcategoriespage = new SubCategoriesPage(driver);
@@ -29,7 +29,7 @@ public class SubCategoriesTest extends Base {
 	}
 	
 	@Test
-	public void verifyGoHome() throws InterruptedException
+	public void verifyGoHomeIsClickable() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);		
 		dashboardpage = loginpage.login("admin", "admin");
@@ -42,7 +42,7 @@ public class SubCategoriesTest extends Base {
 	}
 	
 	@Test
-	public void verifySearchSubCategory() throws InterruptedException
+	public void verifySearchButtonIsClickable() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);		
 		dashboardpage = loginpage.login("admin", "admin");
@@ -54,24 +54,24 @@ public class SubCategoriesTest extends Base {
 	}
 	
 	@Test
-	public void verifySearchResetSubCategory() throws InterruptedException
+	public void verifyIsResetButtonClickable() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);		
 		dashboardpage = loginpage.login("admin", "admin");
 		subcategoriespage = new SubCategoriesPage(driver);
 		dashboardpage.clickEachCategory2("list-sub-category");	
-		String actual = subcategoriespage.searchResetCategoryClick("brocoli");
+		String actual = subcategoriespage.searchResetCategoryClick("veggies");
 		String expected = "List Sub Categories";
 		Assert.assertEquals(actual, expected);
 	}
 	@Test
-	public void verifyDeleteCategoryFromTable() throws InterruptedException
+	public void verifyDeleteEntriesFromTableOfSubCategory() throws InterruptedException
 	{
 		loginpage = new LoginPage(driver);
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-sub-category");
 		subcategoriespage = new SubCategoriesPage(driver);	
-		String actualDeleteMsg = subcategoriespage.deleteCategory("Cole");
+		String actualDeleteMsg = subcategoriespage.deleteCategory("ss");
 		String expectedDeleteMsg = "Alert!Sub Category Deleted Successfully";
 		Assert.assertEquals(actualDeleteMsg, expectedDeleteMsg);
 	}
@@ -83,7 +83,7 @@ public class SubCategoriesTest extends Base {
 		dashboardpage = loginpage.login("admin", "admin");
 		dashboardpage.clickEachCategory2("list-sub-category");
 		subcategoriespage = new SubCategoriesPage(driver);	
-		String actualDeleteMsg = subcategoriespage.EditCategory("buds");
+		String actualDeleteMsg = subcategoriespage.EditCategory("Gus");
 		String expectedDeleteMsg = "Alert!Sub Category Updated Successfully";
 		Assert.assertEquals(actualDeleteMsg, expectedDeleteMsg);
 	}
